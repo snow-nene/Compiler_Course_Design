@@ -9,10 +9,10 @@
 #include <iostream>
 #include <memory>
 #include <string>
-
+#include"ast.h"
 // 声明 lexer 函数和错误处理函数
 int yylex();
-void yyerror(std::unique_ptr<BaseAST> &ast, const char *s);
+void yyerror( std::unique_ptr<BaseAST> &ast, const char *s);
 
 using namespace std;
 
@@ -41,7 +41,8 @@ using namespace std;
 %token <int_val> INT_CONST
 
 // 非终结符的类型定义
-%type <str_val> FuncDef FuncType Block Stmt Number
+%type <ast_val> FuncDef FuncType Block Stmt
+%type <int_val> Number
 
 %%
 
@@ -52,10 +53,11 @@ using namespace std;
 // $1 指代规则里第一个符号的返回值, 也就是 FuncDef 的返回值
 CompUnit
   : FuncDef {
-    ast = unique_ptr<string>($1);
+    auto comp_unit = make_unique<CompUnitAST>();
+    comp_unit->func_def = unique_ptr<BaseAST>($1);
+    ast = move(comp_unit);
   }
   ;
-
 // FuncDef ::= FuncType IDENT '(' ')' Block;
 // 我们这里可以直接写 '(' 和 ')', 因为之前在 lexer 里已经处理了单个字符的情况
 // 解析完成后, 把这些符号的结果收集起来, 然后拼成一个新的字符串, 作为结果返回
@@ -68,10 +70,11 @@ CompUnit
 // 这种写法会省下很多内存管理的负担
 FuncDef
   : FuncType IDENT '(' ')' Block {
-    auto type = unique_ptr<string>($1);
-    auto ident = unique_ptr<string>($2);
-    auto block = unique_ptr<string>($5);
-    $$ = new string(*type + " " + *ident + "() " + *block);
+    auto ast = new FuncDefAST();
+    ast->func_type = unique_ptr<BaseAST>($1);
+    ast->ident = *unique_ptr<string>($2);
+    ast->block = unique_ptr<BaseAST>($5);
+    $$ = ast;
   }
   ;
 
@@ -98,7 +101,7 @@ Stmt
 
 Number
   : INT_CONST {
-    $$ = new string(to_string($1));
+    $$ = $1;
   }
   ;
 
