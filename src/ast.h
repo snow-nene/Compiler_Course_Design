@@ -8,19 +8,23 @@ class BaseAST {
   virtual ~BaseAST() = default;
 
   virtual void Dump() const = 0;
+  virtual void DumpAST() const = 0;
 };
-
 
 class CompUnitAST : public BaseAST {
  public:
   std::unique_ptr<BaseAST> func_def;
 
   void Dump() const override {
-    std::cout << "CompUnitAST { ";
     func_def->Dump();
+  }
+  void DumpAST() const override {
+    std::cout << "CompUnitAST { ";
+    func_def->DumpAST();
     std::cout << " }";
   }
 };
+
 class FuncDefAST : public BaseAST {
  public:
   std::unique_ptr<BaseAST> func_type;
@@ -28,38 +32,60 @@ class FuncDefAST : public BaseAST {
   std::unique_ptr<BaseAST> block;
 
   void Dump() const override {
-    std::cout << "FuncDefAST { ";
+    std::cout << "fun ";
+    std::cout << "@" << ident << "(): ";
     func_type->Dump();
-    std::cout << ", " << ident << ", ";
+    std::cout << "{ " << std::endl;
     block->Dump();
+    std::cout << "} " << std::endl;
+  }
+  void DumpAST() const override {
+    std::cout << "FuncDefAST { ";
+    func_type->DumpAST();
+    std::cout << ", " << ident << ", ";
+    block->DumpAST();
     std::cout << " }";
   }
 };
-class FuncTypeAST:public BaseAST{
-  public:
-    std::string type;
-  
-  void Dump() const override {
-      std::cout << " { ";
-      std::cout<<type;
-      std::cout << " } ";
-  }
 
-};
-class BlockAST:public BaseAST{
-   public:
-    std::unique_ptr<BaseAST> stmt;
-  
+class FuncTypeAST : public BaseAST {
+ public:
+  std::string type;
   void Dump() const override {
-      std::cout << " BlockAST { ";
-      stmt->Dump();
-      std::cout << " } ";
+    std::cout << "i32" << " ";
+  }
+  void DumpAST() const override {
+    std::cout << "FuncTypeAST { ";
+    //std::cout << type;
+    std::cout << " }";
   }
 };
-class StmtAST:public BaseAST{
-   public:
-    int num;
+
+class BlockAST : public BaseAST {
+ public:
+  std::unique_ptr<BaseAST> stmt;
   void Dump() const override {
-      std::cout<<num;
+    std::cout << "\%entry" << ": " << std::endl;
+    stmt->Dump();
+    std::cout << std::endl;
+  }
+  void DumpAST() const override {
+    std::cout << "BlockAST { ";
+    stmt->DumpAST();
+    std::cout << " }";
+  }
+};
+
+class StmtAST : public BaseAST {
+ public:
+  int number;
+  void Dump() const override {
+    std::cout << "  ret ";
+    //std::cout << number;
+  }
+  void DumpAST() const override {
+    std::cout << "StmtAST { ";
+    //std::cout << number;
+    std::cout << " }";
   }
 };

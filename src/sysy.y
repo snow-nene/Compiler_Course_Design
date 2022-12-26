@@ -83,27 +83,30 @@ FuncDef
 FuncType
   : INT {
     auto ast = new FuncTypeAST();
-    ast->type="int";
+    //ast->type="int";
+    $$ = ast;
   }
   ;
 
 Block
   : '{' Stmt '}' {
     auto ast=new BlockAST();
-    ast->stmt=unique_ptr<BaseAST>($2);
+    //ast->stmt=unique_ptr<BaseAST>($2);
+    $$ = ast;
   }
   ;
 
 Stmt
   : RETURN Number ';' {
     auto ast=new StmtAST();
-    ast->num=0;
+    //ast->num=0;
+    $$ = ast;
   }
   ;
 
 Number
   : INT_CONST {
-    $$ = $1;
+    //$$ = $1;
   }
   ;
 
