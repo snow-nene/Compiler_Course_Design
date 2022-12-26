@@ -81,11 +81,11 @@ class StmtAST : public BaseAST {
   int number;
   void Dump() const override {
     std::cout << "  ret ";
-    //std::cout << number;
+    std::cout << number;
   }
   void DumpAST() const override {
     std::cout << "StmtAST { ";
-    //std::cout << number;
+    std::cout << number;
     std::cout << " }";
   }
 };
