@@ -82,21 +82,22 @@ FuncDef
 // 同上, 不再解释
 FuncType
   : INT {
-    $$ = new string("int");
+    auto ast = new FuncTypeAST();
+    ast->type="int";
   }
   ;
 
 Block
   : '{' Stmt '}' {
-    auto stmt = unique_ptr<string>($2);
-    $$ = new string("{ " + *stmt + " }");
+    auto ast=new BlockAST();
+    ast->stmt=unique_ptr<BaseAST>($2);
   }
   ;
 
 Stmt
   : RETURN Number ';' {
-    auto number = unique_ptr<string>($2);
-    $$ = new string("return " + *number + ";");
+    auto ast=new StmtAST();
+    ast->num=0;
   }
   ;
 
