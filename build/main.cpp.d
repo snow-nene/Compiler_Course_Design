@@ -1,2 +1,3 @@
-/root/Compiler_Course_Design/build/main.cpp.o: \
-  /root/Compiler_Course_Design/src/main.cpp
+/root/test/build/main.cpp.o: /root/test/src/main.cpp /root/test/src/ast.h
+
+/root/test/src/ast.h:

@@ -66,13 +66,13 @@
 
 
 /* First part of user prologue.  */
-#line 7 "/root/Compiler_Course_Design/src/sysy.y"
+#line 7 "/root/test/src/sysy.y"
 
 
 #include <iostream>
 #include <memory>
 #include <string>
-#include"ast.h"
+#include "ast.h"
 // 声明 lexer 函数和错误处理函数
 int yylex();
 void yyerror( std::unique_ptr<BaseAST> &ast, const char *s);
@@ -80,7 +80,7 @@ void yyerror( std::unique_ptr<BaseAST> &ast, const char *s);
 using namespace std;
 
 
-#line 84 "/root/Compiler_Course_Design/build/sysy.tab.cpp"
+#line 84 "/root/test/build/sysy.tab.cpp"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -113,8 +113,8 @@ using namespace std;
 
 /* Use api.header.include to #include this header
    instead of duplicating it here.  */
-#ifndef YY_YY_ROOT_COMPILER_COURSE_DESIGN_BUILD_SYSY_TAB_HPP_INCLUDED
-# define YY_YY_ROOT_COMPILER_COURSE_DESIGN_BUILD_SYSY_TAB_HPP_INCLUDED
+#ifndef YY_YY_ROOT_TEST_BUILD_SYSY_TAB_HPP_INCLUDED
+# define YY_YY_ROOT_TEST_BUILD_SYSY_TAB_HPP_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -123,13 +123,13 @@ using namespace std;
 extern int yydebug;
 #endif
 /* "%code requires" blocks.  */
-#line 1 "/root/Compiler_Course_Design/src/sysy.y"
+#line 1 "/root/test/src/sysy.y"
 
   #include <memory>
   #include <string>
   #include"ast.h"
 
-#line 133 "/root/Compiler_Course_Design/build/sysy.tab.cpp"
+#line 133 "/root/test/build/sysy.tab.cpp"
 
 /* Token type.  */
 #ifndef YYTOKENTYPE
@@ -147,13 +147,13 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 31 "/root/Compiler_Course_Design/src/sysy.y"
+#line 31 "/root/test/src/sysy.y"
 
   std::string *str_val;
   int int_val;
   BaseAST *ast_val;
 
-#line 157 "/root/Compiler_Course_Design/build/sysy.tab.cpp"
+#line 157 "/root/test/build/sysy.tab.cpp"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -166,7 +166,7 @@ extern YYSTYPE yylval;
 
 int yyparse (std::unique_ptr<BaseAST> &ast);
 
-#endif /* !YY_YY_ROOT_COMPILER_COURSE_DESIGN_BUILD_SYSY_TAB_HPP_INCLUDED  */
+#endif /* !YY_YY_ROOT_TEST_BUILD_SYSY_TAB_HPP_INCLUDED  */
 
 
 
@@ -529,7 +529,7 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    55,    55,    72,    83,    89,    96,   103
+       0,    56,    56,    73,    84,    92,   100,   108
 };
 #endif
 
@@ -1323,17 +1323,17 @@ yyreduce:
   switch (yyn)
     {
   case 2:
-#line 55 "/root/Compiler_Course_Design/src/sysy.y"
+#line 56 "/root/test/src/sysy.y"
             {
     auto comp_unit = make_unique<CompUnitAST>();
     comp_unit->func_def = unique_ptr<BaseAST>((yyvsp[0].ast_val));
     ast = move(comp_unit);
   }
-#line 1333 "/root/Compiler_Course_Design/build/sysy.tab.cpp"
+#line 1333 "/root/test/build/sysy.tab.cpp"
     break;
 
   case 3:
-#line 72 "/root/Compiler_Course_Design/src/sysy.y"
+#line 73 "/root/test/src/sysy.y"
                                  {
     auto ast = new FuncDefAST();
     ast->func_type = unique_ptr<BaseAST>((yyvsp[-4].ast_val));
@@ -1341,45 +1341,49 @@ yyreduce:
     ast->block = unique_ptr<BaseAST>((yyvsp[0].ast_val));
     (yyval.ast_val) = ast;
   }
-#line 1345 "/root/Compiler_Course_Design/build/sysy.tab.cpp"
+#line 1345 "/root/test/build/sysy.tab.cpp"
     break;
 
   case 4:
-#line 83 "/root/Compiler_Course_Design/src/sysy.y"
+#line 84 "/root/test/src/sysy.y"
         {
-    (yyval.ast_val) = new string("int");
+    auto ast = new FuncTypeAST();
+    ast->type="int";
+    (yyval.ast_val) = ast;
   }
-#line 1353 "/root/Compiler_Course_Design/build/sysy.tab.cpp"
+#line 1355 "/root/test/build/sysy.tab.cpp"
     break;
 
   case 5:
-#line 89 "/root/Compiler_Course_Design/src/sysy.y"
+#line 92 "/root/test/src/sysy.y"
                  {
-    auto stmt = unique_ptr<string>((yyvsp[-1].ast_val));
-    (yyval.ast_val) = new string("{ " + *stmt + " }");
+    auto ast=new BlockAST();
+    ast->stmt=unique_ptr<BaseAST>((yyvsp[-1].ast_val));
+    (yyval.ast_val) = ast;
   }
-#line 1362 "/root/Compiler_Course_Design/build/sysy.tab.cpp"
+#line 1365 "/root/test/build/sysy.tab.cpp"
     break;
 
   case 6:
-#line 96 "/root/Compiler_Course_Design/src/sysy.y"
+#line 100 "/root/test/src/sysy.y"
                       {
-    auto number = unique_ptr<string>((yyvsp[-1].int_val));
-    (yyval.ast_val) = new string("return " + *number + ";");
+    auto ast=new StmtAST();
+    ast->number=0;
+    (yyval.ast_val) = ast;
   }
-#line 1371 "/root/Compiler_Course_Design/build/sysy.tab.cpp"
+#line 1375 "/root/test/build/sysy.tab.cpp"
     break;
 
   case 7:
-#line 103 "/root/Compiler_Course_Design/src/sysy.y"
+#line 108 "/root/test/src/sysy.y"
               {
     (yyval.int_val) = (yyvsp[0].int_val);
   }
-#line 1379 "/root/Compiler_Course_Design/build/sysy.tab.cpp"
+#line 1383 "/root/test/build/sysy.tab.cpp"
     break;
 
 
-#line 1383 "/root/Compiler_Course_Design/build/sysy.tab.cpp"
+#line 1387 "/root/test/build/sysy.tab.cpp"
 
       default: break;
     }
@@ -1611,11 +1615,25 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 108 "/root/Compiler_Course_Design/src/sysy.y"
+#line 113 "/root/test/src/sysy.y"
 
 
 // 定义错误处理函数, 其中第二个参数是错误信息
 // parser 如果发生错误 (例如输入的程序出现了语法错误), 就会调用这个函数
-void yyerror(unique_ptr<BaseAST> &ast, const char *s) {
-  cerr << "error: " << s << endl;
+//void yyerror(unique_ptr<BaseAST> &ast, const char *s) {
+//  cerr << "error: " << s << endl;}
+
+void yyerror(std::unique_ptr<BaseAST> &ast, const char *s) {
+  
+    extern int yylineno;    // defined and maintained in lex
+    extern char* yytext;    // defined and maintained in lex
+    int len= 0;
+    while(yytext[len] != '\0') len ++ ;
+    int i;
+    char buf[512]={0};
+    for (i=0;i<len;++i){
+        sprintf(buf,"%s%d ",buf,yytext[i]);
+    }
+    fprintf(stderr, "ERROR: %s at symbol '%s' on line %d\n", s, buf, yylineno);
+
 }

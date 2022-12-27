@@ -1,6 +1,6 @@
-#line 2 "/root/Compiler_Course_Design/build/sysy.lex.cpp"
+#line 2 "/root/test/build/sysy.lex.cpp"
 
-#line 4 "/root/Compiler_Course_Design/build/sysy.lex.cpp"
+#line 4 "/root/test/build/sysy.lex.cpp"
 
 #define  YY_INT_ALIGNED short int
 
@@ -461,9 +461,9 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "/root/Compiler_Course_Design/src/sysy.l"
+#line 1 "/root/test/src/sysy.l"
 #define YY_NO_INPUT 1
-#line 6 "/root/Compiler_Course_Design/src/sysy.l"
+#line 6 "/root/test/src/sysy.l"
 
 #include <cstdlib>
 #include <string>
@@ -474,11 +474,11 @@ char *yytext;
 
 using namespace std;
 
-#line 478 "/root/Compiler_Course_Design/build/sysy.lex.cpp"
+#line 478 "/root/test/build/sysy.lex.cpp"
 /* 空白符和注释 */
 /* 标识符 */
 /* 整数字面量 */
-#line 482 "/root/Compiler_Course_Design/build/sysy.lex.cpp"
+#line 482 "/root/test/build/sysy.lex.cpp"
 
 #define INITIAL 0
 
@@ -693,10 +693,10 @@ YY_DECL
 		}
 
 	{
-#line 30 "/root/Compiler_Course_Design/src/sysy.l"
+#line 30 "/root/test/src/sysy.l"
 
 
-#line 700 "/root/Compiler_Course_Design/build/sysy.lex.cpp"
+#line 700 "/root/test/build/sysy.lex.cpp"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -756,55 +756,55 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 /* rule 1 can match eol */
 YY_RULE_SETUP
-#line 32 "/root/Compiler_Course_Design/src/sysy.l"
+#line 32 "/root/test/src/sysy.l"
 { /* 忽略, 不做任何操作 */ }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 33 "/root/Compiler_Course_Design/src/sysy.l"
+#line 33 "/root/test/src/sysy.l"
 { /* 忽略, 不做任何操作 */ }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 35 "/root/Compiler_Course_Design/src/sysy.l"
+#line 35 "/root/test/src/sysy.l"
 { return INT; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 36 "/root/Compiler_Course_Design/src/sysy.l"
+#line 36 "/root/test/src/sysy.l"
 { return RETURN; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 38 "/root/Compiler_Course_Design/src/sysy.l"
+#line 38 "/root/test/src/sysy.l"
 { yylval.str_val = new string(yytext); return IDENT; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 40 "/root/Compiler_Course_Design/src/sysy.l"
+#line 40 "/root/test/src/sysy.l"
 { yylval.int_val = strtol(yytext, nullptr, 0); return INT_CONST; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 41 "/root/Compiler_Course_Design/src/sysy.l"
+#line 41 "/root/test/src/sysy.l"
 { yylval.int_val = strtol(yytext, nullptr, 0); return INT_CONST; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 42 "/root/Compiler_Course_Design/src/sysy.l"
+#line 42 "/root/test/src/sysy.l"
 { yylval.int_val = strtol(yytext, nullptr, 0); return INT_CONST; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 44 "/root/Compiler_Course_Design/src/sysy.l"
+#line 44 "/root/test/src/sysy.l"
 { return yytext[0]; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 46 "/root/Compiler_Course_Design/src/sysy.l"
+#line 46 "/root/test/src/sysy.l"
 ECHO;
 	YY_BREAK
-#line 808 "/root/Compiler_Course_Design/build/sysy.lex.cpp"
+#line 808 "/root/test/build/sysy.lex.cpp"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1772,6 +1772,6 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 46 "/root/Compiler_Course_Design/src/sysy.l"
+#line 46 "/root/test/src/sysy.l"
 
 
