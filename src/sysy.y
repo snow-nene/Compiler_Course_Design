@@ -99,7 +99,7 @@ Block
 Stmt
   : RETURN Number ';' {
     auto ast=new StmtAST();
-    ast->number=0;
+    ast->number=$2;
     $$ = ast;
   }
   ;

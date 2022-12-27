@@ -56,7 +56,7 @@ class FuncTypeAST : public BaseAST {
   }
   void DumpAST() const override {
     std::cout << "FuncTypeAST { ";
-    //std::cout << type;
+    std::cout << type;
     std::cout << " }";
   }
 };
